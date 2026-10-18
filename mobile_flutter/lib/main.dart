@@ -469,6 +469,16 @@ class _HomePreviewPageState extends State<HomePreviewPage> {
                           return;
                         }
 
+                        if (index == 3) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProfilePage(),
+                            ),
+                          );
+                          return;
+                        }
+
                         if (index == 0) {
                           setState(() {
                             selectedMenu = 0;
@@ -991,12 +1001,18 @@ class _ExplorePageState extends State<ExplorePage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ExploreNavItem(
+               ExploreNavItem(
                     icon: Icons.home_rounded,
                     label: 'Beranda',
                     selected: false,
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePreviewPage(),
+                        ),
+                        (route) => false,
+                      );
                     },
                   ),
                   ExploreNavItem(
@@ -1015,7 +1031,14 @@ class _ExplorePageState extends State<ExplorePage> {
                     icon: Icons.person_rounded,
                     label: 'Profil',
                     selected: false,
-                    onTap: showGuestMessage,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfilePage(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -1220,6 +1243,583 @@ class AppFilterDropdown extends StatelessWidget {
         );
       }).toList(),
       onChanged: onChanged,
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
+  void showPreviewMessage(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: AppColors.surfaceLight,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(20, 22, 20, 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Profil',
+                      style: TextStyle(
+                        color: AppColors.textPrimary,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+
+                    const SizedBox(height: 28),
+
+                    // Tidak memakai foto profil upload.
+                    Center(
+                      child: Container(
+                        width: 88,
+                        height: 88,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColors.surfaceLight,
+                        ),
+                        child: const Icon(
+                          Icons.person_rounded,
+                          color: AppColors.gold,
+                          size: 46,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 14),
+
+                    const Center(
+                      child: Text(
+                        'Wahyu Adi Saputra',
+                        style: TextStyle(
+                          color: AppColors.textPrimary,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 5),
+
+                    const Center(
+                      child: Text(
+                        'Teknik Informatika · Polibatam',
+                        style: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    const Row(
+                      children: [
+                        Expanded(
+                          child: ProfileStatistic(
+                            value: '4',
+                            label: 'Karya',
+                            icon: Icons.inventory_2_outlined,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: ProfileStatistic(
+                            value: '312',
+                            label: 'Suka',
+                            icon: Icons.favorite_border_rounded,
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: ProfileStatistic(
+                            value: '18',
+                            label: 'Disimpan',
+                            icon: Icons.bookmark_border_rounded,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 22),
+
+                    SizedBox(
+                      width: double.infinity,
+                      height: 52,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          showPreviewMessage(
+                            context,
+                            'Halaman Ajukan Karya akan dibuat berikutnya.',
+                          );
+                        },
+                        icon: const Icon(Icons.add_rounded),
+                        label: const Text(
+                          'Ajukan Karya Baru',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.gold,
+                          foregroundColor: AppColors.background,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 30),
+
+                    const Text(
+                      'Karya Saya',
+                      style: TextStyle(
+                        color: AppColors.textPrimary,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+
+                    const SizedBox(height: 14),
+
+                    ProfileWorkTile(
+                      title: 'Smart Garden IoT',
+                      status: 'Tayang',
+                      onEdit: () {
+                        showPreviewMessage(
+                          context,
+                          'Fitur perubahan karya akan dibuat nanti.',
+                        );
+                      },
+                      onDelete: () {
+                        showPreviewMessage(
+                          context,
+                          'Fitur hapus karya akan dibuat nanti.',
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    ProfileWorkTile(
+                      title: 'Aplikasi Kasir Flutter',
+                      status: 'Tayang',
+                      onEdit: () {
+                        showPreviewMessage(
+                          context,
+                          'Fitur perubahan karya akan dibuat nanti.',
+                        );
+                      },
+                      onDelete: () {
+                        showPreviewMessage(
+                          context,
+                          'Fitur hapus karya akan dibuat nanti.',
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 28),
+
+                    const Text(
+                      'Lainnya',
+                      style: TextStyle(
+                        color: AppColors.textPrimary,
+                        fontSize: 21,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+
+                    const SizedBox(height: 10),
+
+                    ProfileMenuTile(
+                      icon: Icons.bookmark_border_rounded,
+                      title: 'Tersimpan',
+                      subtitle: 'Karya yang ingin dilihat lagi',
+                      onTap: () {
+                        showPreviewMessage(
+                          context,
+                          'Halaman karya tersimpan akan dibuat nanti.',
+                        );
+                      },
+                    ),
+
+                    ProfileMenuTile(
+                      icon: Icons.interests_outlined,
+                      title: 'Minat Saya',
+                      subtitle: 'Atur minat untuk rekomendasi',
+                      onTap: () {
+                        showPreviewMessage(
+                          context,
+                          'Halaman pilih minat akan dibuat nanti.',
+                        );
+                      },
+                    ),
+
+                    ProfileMenuTile(
+                      icon: Icons.notifications_none_rounded,
+                      title: 'Aktivitas',
+                      subtitle: 'Status karya dan notifikasi',
+                      onTap: () {
+                        showPreviewMessage(
+                          context,
+                          'Halaman Aktivitas akan dibuat nanti.',
+                        );
+                      },
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    OutlinedButton.icon(
+                      onPressed: () {
+                        Navigator.popUntil(context, (route) => route.isFirst);
+                      },
+                      icon: const Icon(Icons.logout_rounded),
+                      label: const Text('Keluar'),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: const Color(0xFFE87575),
+                        side: const BorderSide(
+                          color: Color(0xFF6C3434),
+                        ),
+                        minimumSize: const Size(double.infinity, 52),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const AppBottomNavigation(selectedIndex: 3),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileStatistic extends StatelessWidget {
+  final String value;
+  final String label;
+  final IconData icon;
+
+  const ProfileStatistic({
+    super.key,
+    required this.value,
+    required this.label,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            color: AppColors.gold,
+            size: 19,
+          ),
+          const SizedBox(height: 6),
+          Text(
+            value,
+            style: const TextStyle(
+              color: AppColors.textPrimary,
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            label,
+            style: const TextStyle(
+              color: AppColors.textSecondary,
+              fontSize: 11,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileWorkTile extends StatelessWidget {
+  final String title;
+  final String status;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+
+  const ProfileWorkTile({
+    super.key,
+    required this.title,
+    required this.status,
+    required this.onEdit,
+    required this.onDelete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.fromLTRB(16, 13, 12, 13),
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: AppColors.surfaceLight,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(
+              Icons.article_outlined,
+              color: AppColors.gold,
+              size: 21,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: AppColors.textPrimary,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  status,
+                  style: const TextStyle(
+                    color: Color(0xFF75C98C),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          IconButton(
+            onPressed: onEdit,
+            icon: const Icon(
+              Icons.edit_outlined,
+              color: AppColors.gold,
+              size: 20,
+            ),
+            tooltip: 'Ubah karya',
+          ),
+          IconButton(
+            onPressed: onDelete,
+            icon: const Icon(
+              Icons.delete_outline_rounded,
+              color: Color(0xFFE87575),
+              size: 20,
+            ),
+            tooltip: 'Hapus karya',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileMenuTile extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  const ProfileMenuTile({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.border),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: AppColors.surfaceLight,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                icon,
+                color: AppColors.gold,
+                size: 22,
+              ),
+            ),
+            const SizedBox(width: 13),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Icon(
+              Icons.chevron_right_rounded,
+              color: AppColors.textSecondary,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AppBottomNavigation extends StatelessWidget {
+  final int selectedIndex;
+
+  const AppBottomNavigation({
+    super.key,
+    required this.selectedIndex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final labels = ['Beranda', 'Eksplor', 'Ruang 3D', 'Profil'];
+
+    final icons = [
+      Icons.home_rounded,
+      Icons.explore_rounded,
+      Icons.view_in_ar_rounded,
+      Icons.person_rounded,
+    ];
+
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color(0xFF141816),
+        border: Border(
+          top: BorderSide(color: AppColors.border),
+        ),
+      ),
+      child: Row(
+        children: List.generate(labels.length, (index) {
+          final isSelected = selectedIndex == index;
+
+          return Expanded(
+            child: InkWell(
+              onTap: () {
+                if (index == 0) {
+                 Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePreviewPage(),
+                    ),
+                    (route) => false,
+                  );
+                } else if (index == 1) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ExplorePage(),
+                    ),
+                  );
+                } else if (index == 2) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Halaman Ruang 3D akan dibuat berikutnya.'),
+                      backgroundColor: AppColors.surfaceLight,
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 13),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      icons[index],
+                      color: isSelected
+                          ? AppColors.gold
+                          : AppColors.textSecondary,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      labels[index],
+                      style: TextStyle(
+                        color: isSelected
+                            ? AppColors.gold
+                            : AppColors.textSecondary,
+                        fontSize: 12,
+                        fontWeight: isSelected
+                            ? FontWeight.w800
+                            : FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }),
+      ),
     );
   }
 }

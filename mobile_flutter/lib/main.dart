@@ -53,10 +53,7 @@ class WelcomePage extends StatelessWidget {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 24,
-                vertical: 20,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
                   minHeight: constraints.maxHeight - 40,
@@ -75,10 +72,7 @@ class WelcomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(28),
                             gradient: const LinearGradient(
-                              colors: [
-                                Color(0xFFFFD445),
-                                Color(0xFFE3A514),
-                              ],
+                              colors: [Color(0xFFFFD445), Color(0xFFE3A514)],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
@@ -153,9 +147,11 @@ class WelcomePage extends StatelessWidget {
                         height: 54,
                         child: ElevatedButton(
                           onPressed: () {
-                            showInfo(
+                            Navigator.push(
                               context,
-                              'Halaman login akan dibuat setelah UI dasar selesai.',
+                              MaterialPageRoute(
+                                builder: (context) => const LoginPage(),
+                              ),
                             );
                           },
                           style: ElevatedButton.styleFrom(
@@ -183,9 +179,11 @@ class WelcomePage extends StatelessWidget {
                         height: 54,
                         child: OutlinedButton(
                           onPressed: () {
-                            showInfo(
+                            Navigator.push(
                               context,
-                              'Halaman pendaftaran akan dibuat setelah UI dasar selesai.',
+                              MaterialPageRoute(
+                                builder: (context) => const RegisterPage(),
+                              ),
                             );
                           },
                           style: OutlinedButton.styleFrom(
@@ -254,12 +252,7 @@ class HomePreviewPage extends StatefulWidget {
 class _HomePreviewPageState extends State<HomePreviewPage> {
   int selectedMenu = 0;
 
-  final List<String> menuLabels = [
-    'Beranda',
-    'Eksplor',
-    'Ruang 3D',
-    'Profil',
-  ];
+  final List<String> menuLabels = ['Beranda', 'Eksplor', 'Ruang 3D', 'Profil'];
 
   void showGuestMessage() {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -307,9 +300,8 @@ class _HomePreviewPageState extends State<HomePreviewPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ExplorePage(
-                              openSearch: true,
-                            ),
+                            builder: (context) =>
+                                const ExplorePage(openSearch: true),
                           ),
                         );
                       },
@@ -347,15 +339,10 @@ class _HomePreviewPageState extends State<HomePreviewPage> {
                       padding: const EdgeInsets.all(22),
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                          colors: [
-                            Color(0xFF2A2412),
-                            Color(0xFF151916),
-                          ],
+                          colors: [Color(0xFF2A2412), Color(0xFF151916)],
                         ),
                         borderRadius: BorderRadius.circular(22),
-                        border: Border.all(
-                          color: const Color(0xFF4A4020),
-                        ),
+                        border: Border.all(color: const Color(0xFF4A4020)),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -399,9 +386,7 @@ class _HomePreviewPageState extends State<HomePreviewPage> {
                               ),
                               child: const Text(
                                 'Masuk Ruang 3D',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w800,
-                                ),
+                                style: TextStyle(fontWeight: FontWeight.w800),
                               ),
                             ),
                           ),
@@ -447,9 +432,7 @@ class _HomePreviewPageState extends State<HomePreviewPage> {
             Container(
               decoration: const BoxDecoration(
                 color: Color(0xFF141816),
-                border: Border(
-                  top: BorderSide(color: AppColors.border),
-                ),
+                border: Border(top: BorderSide(color: AppColors.border)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -647,13 +630,11 @@ class WorkCard extends StatelessWidget {
     );
   }
 }
+
 class ExplorePage extends StatefulWidget {
   final bool openSearch;
 
-  const ExplorePage({
-    super.key,
-    this.openSearch = false,
-  });
+  const ExplorePage({super.key, this.openSearch = false});
 
   @override
   State<ExplorePage> createState() => _ExplorePageState();
@@ -664,7 +645,7 @@ class _ExplorePageState extends State<ExplorePage> {
   final FocusNode searchFocusNode = FocusNode();
 
   String searchQuery = '';
-    String selectedStudyProgram = 'Semua Prodi';
+  String selectedStudyProgram = 'Semua Prodi';
   String selectedYear = 'Semua Tahun';
 
   final List<String> studyPrograms = [
@@ -675,12 +656,7 @@ class _ExplorePageState extends State<ExplorePage> {
     'Multimedia',
   ];
 
-  final List<String> exhibitionYears = [
-    'Semua Tahun',
-    '2026',
-    '2025',
-    '2024',
-  ];
+  final List<String> exhibitionYears = ['Semua Tahun', '2026', '2025', '2024'];
   String selectedCategory = 'Semua';
   String selectedTag = 'Flutter';
 
@@ -792,12 +768,12 @@ class _ExplorePageState extends State<ExplorePage> {
                               ),
                         filled: true,
                         fillColor: AppColors.surface,
-                        contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                        contentPadding: const EdgeInsets.symmetric(
+                          vertical: 17,
+                        ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
-                          borderSide: const BorderSide(
-                            color: AppColors.border,
-                          ),
+                          borderSide: const BorderSide(color: AppColors.border),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -994,14 +970,12 @@ class _ExplorePageState extends State<ExplorePage> {
             Container(
               decoration: const BoxDecoration(
                 color: Color(0xFF141816),
-                border: Border(
-                  top: BorderSide(color: AppColors.border),
-                ),
+                border: Border(top: BorderSide(color: AppColors.border)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-               ExploreNavItem(
+                  ExploreNavItem(
                     icon: Icons.home_rounded,
                     label: 'Beranda',
                     selected: false,
@@ -1183,6 +1157,7 @@ class ExploreWorkCard extends StatelessWidget {
     );
   }
 }
+
 class AppFilterDropdown extends StatelessWidget {
   final String label;
   final String value;
@@ -1200,22 +1175,17 @@ class AppFilterDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
-      value: value,
+      initialValue: value,
       isExpanded: true,
       dropdownColor: AppColors.surfaceLight,
       icon: const Icon(
         Icons.keyboard_arrow_down_rounded,
         color: AppColors.gold,
       ),
-      style: const TextStyle(
-        color: AppColors.textPrimary,
-        fontSize: 15,
-      ),
+      style: const TextStyle(color: AppColors.textPrimary, fontSize: 15),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(
-          color: AppColors.textSecondary,
-        ),
+        labelStyle: const TextStyle(color: AppColors.textSecondary),
         filled: true,
         fillColor: AppColors.surface,
         contentPadding: const EdgeInsets.symmetric(
@@ -1224,23 +1194,15 @@ class AppFilterDropdown extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(
-            color: AppColors.border,
-          ),
+          borderSide: const BorderSide(color: AppColors.border),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(
-            color: AppColors.gold,
-            width: 1.5,
-          ),
+          borderSide: const BorderSide(color: AppColors.gold, width: 1.5),
         ),
       ),
       items: items.map((item) {
-        return DropdownMenuItem<String>(
-          value: item,
-          child: Text(item),
-        );
+        return DropdownMenuItem<String>(value: item, child: Text(item));
       }).toList(),
       onChanged: onChanged,
     );
@@ -1494,9 +1456,7 @@ class ProfilePage extends StatelessWidget {
                       label: const Text('Keluar'),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: const Color(0xFFE87575),
-                        side: const BorderSide(
-                          color: Color(0xFF6C3434),
-                        ),
+                        side: const BorderSide(color: Color(0xFF6C3434)),
                         minimumSize: const Size(double.infinity, 52),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
@@ -1539,11 +1499,7 @@ class ProfileStatistic extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Icon(
-            icon,
-            color: AppColors.gold,
-            size: 19,
-          ),
+          Icon(icon, color: AppColors.gold, size: 19),
           const SizedBox(height: 6),
           Text(
             value,
@@ -1690,11 +1646,7 @@ class ProfileMenuTile extends StatelessWidget {
                 color: AppColors.surfaceLight,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(
-                icon,
-                color: AppColors.gold,
-                size: 22,
-              ),
+              child: Icon(icon, color: AppColors.gold, size: 22),
             ),
             const SizedBox(width: 13),
             Expanded(
@@ -1734,10 +1686,7 @@ class ProfileMenuTile extends StatelessWidget {
 class AppBottomNavigation extends StatelessWidget {
   final int selectedIndex;
 
-  const AppBottomNavigation({
-    super.key,
-    required this.selectedIndex,
-  });
+  const AppBottomNavigation({super.key, required this.selectedIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -1753,9 +1702,7 @@ class AppBottomNavigation extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         color: Color(0xFF141816),
-        border: Border(
-          top: BorderSide(color: AppColors.border),
-        ),
+        border: Border(top: BorderSide(color: AppColors.border)),
       ),
       child: Row(
         children: List.generate(labels.length, (index) {
@@ -1765,7 +1712,7 @@ class AppBottomNavigation extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 if (index == 0) {
-                 Navigator.pushAndRemoveUntil(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const HomePreviewPage(),
@@ -1819,6 +1766,628 @@ class AppBottomNavigation extends StatelessWidget {
             ),
           );
         }),
+      ),
+    );
+  }
+}
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  bool _hidePassword = true;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: AppColors.surfaceLight,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  InputDecoration _inputDecoration(String hint) {
+    return InputDecoration(
+      hintText: hint,
+      hintStyle: const TextStyle(color: AppColors.textSecondary),
+      prefixIcon: Icon(
+        hint == 'Masukkan email'
+            ? Icons.email_outlined
+            : Icons.lock_outline_rounded,
+        color: AppColors.textSecondary,
+      ),
+      filled: true,
+      fillColor: AppColors.surface,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: const BorderSide(color: AppColors.border),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: const BorderSide(color: AppColors.gold, width: 1.5),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: const BorderSide(color: Colors.redAccent),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: const BorderSide(color: Colors.redAccent),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.arrow_back_rounded,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 18),
+                Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 76,
+                        height: 76,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          gradient: const LinearGradient(
+                            colors: [Color(0xFFFFD445), Color(0xFFE3A514)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                        child: const Text(
+                          'V',
+                          style: TextStyle(
+                            color: AppColors.background,
+                            fontSize: 42,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      const Text(
+                        'V-EduMatch',
+                        style: TextStyle(
+                          color: AppColors.textPrimary,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      const Text(
+                        'Virtual Exhibition & AI Matchmaking',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 38),
+                const Text(
+                  'Welcome Back',
+                  style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Masuk ke akunmu untuk melanjutkan.',
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 15,
+                  ),
+                ),
+                const SizedBox(height: 28),
+                const Text(
+                  'Email',
+                  style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 9),
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  style: const TextStyle(color: AppColors.textPrimary),
+                  cursorColor: AppColors.gold,
+                  decoration: _inputDecoration('Masukkan email'),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Email wajib diisi.';
+                    }
+                    if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
+                        .hasMatch(value.trim())) {
+                      return 'Masukkan format email yang valid.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Password',
+                  style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 9),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: _hidePassword,
+                  textInputAction: TextInputAction.done,
+                  style: const TextStyle(color: AppColors.textPrimary),
+                  cursorColor: AppColors.gold,
+                  decoration: _inputDecoration('Masukkan password').copyWith(
+                    suffixIcon: IconButton(
+                      tooltip: _hidePassword
+                          ? 'Tampilkan password'
+                          : 'Sembunyikan password',
+                      onPressed: () {
+                        setState(() {
+                          _hidePassword = !_hidePassword;
+                        });
+                      },
+                      icon: Icon(
+                        _hidePassword
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        color: AppColors.textSecondary,
+                      ),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password wajib diisi.';
+                    }
+                    return null;
+                  },
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      _showMessage(
+                        'Fitur lupa password akan dibuat berikutnya.',
+                      );
+                    },
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: AppColors.gold,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 18),
+                SizedBox(
+                  width: double.infinity,
+                  height: 54,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _showMessage(
+                          'Tampilan login berhasil. Autentikasi akun belum '
+                          'dihubungkan.',
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.gold,
+                      foregroundColor: AppColors.background,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    child: const Text(
+                      'Sign In',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Center(
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      const Text(
+                        'Belum punya akun?',
+                        style: TextStyle(color: AppColors.textSecondary),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RegisterPage(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: AppColors.gold,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  bool _hidePassword = true;
+  bool _hideConfirmPassword = true;
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: AppColors.surfaceLight,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  InputDecoration _decoration(String hint, IconData icon) {
+    return InputDecoration(
+      hintText: hint,
+      hintStyle: const TextStyle(color: AppColors.textSecondary),
+      prefixIcon: Icon(icon, color: AppColors.textSecondary),
+      filled: true,
+      fillColor: AppColors.surface,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 17),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: const BorderSide(color: AppColors.border),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: const BorderSide(color: AppColors.gold, width: 1.5),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(
+                    Icons.arrow_back_rounded,
+                    color: AppColors.textPrimary,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 70,
+                        height: 70,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: AppColors.gold,
+                          borderRadius: BorderRadius.circular(22),
+                        ),
+                        child: const Text(
+                          'V',
+                          style: TextStyle(
+                            color: AppColors.background,
+                            fontSize: 40,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        'V-EduMatch',
+                        style: TextStyle(
+                          color: AppColors.textPrimary,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      const Text(
+                        'Virtual Exhibition & AI Matchmaking',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.textSecondary,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 35),
+                const Text(
+                  'Create Account',
+                  style: TextStyle(
+                    color: AppColors.textPrimary,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Buat akun untuk mulai menjelajahi V-EduMatch.',
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: 15,
+                  ),
+                ),
+                const SizedBox(height: 26),
+                const Text(
+                  'Nama Lengkap',
+                  style: TextStyle(color: AppColors.textPrimary),
+                ),
+                const SizedBox(height: 8),
+                TextFormField(
+                  controller: _nameController,
+                  textCapitalization: TextCapitalization.words,
+                  style: const TextStyle(color: AppColors.textPrimary),
+                  decoration: _decoration(
+                    'Masukkan nama lengkap',
+                    Icons.person_outline_rounded,
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Nama lengkap wajib diisi.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 18),
+                const Text(
+                  'Email',
+                  style: TextStyle(color: AppColors.textPrimary),
+                ),
+                const SizedBox(height: 8),
+                TextFormField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  style: const TextStyle(color: AppColors.textPrimary),
+                  decoration: _decoration(
+                    'Masukkan email',
+                    Icons.email_outlined,
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Email wajib diisi.';
+                    }
+                    if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
+                        .hasMatch(value.trim())) {
+                      return 'Format email tidak valid.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 18),
+                const Text(
+                  'Password',
+                  style: TextStyle(color: AppColors.textPrimary),
+                ),
+                const SizedBox(height: 8),
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: _hidePassword,
+                  style: const TextStyle(color: AppColors.textPrimary),
+                  decoration:
+                      _decoration(
+                        'Minimal 8 karakter',
+                        Icons.lock_outline_rounded,
+                      ).copyWith(
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _hidePassword = !_hidePassword;
+                            });
+                          },
+                          icon: Icon(
+                            _hidePassword
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password wajib diisi.';
+                    }
+                    if (value.length < 8) {
+                      return 'Password minimal 8 karakter.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 18),
+                const Text(
+                  'Konfirmasi Password',
+                  style: TextStyle(color: AppColors.textPrimary),
+                ),
+                const SizedBox(height: 8),
+                TextFormField(
+                  controller: _confirmPasswordController,
+                  obscureText: _hideConfirmPassword,
+                  style: const TextStyle(color: AppColors.textPrimary),
+                  decoration:
+                      _decoration(
+                        'Ulangi password',
+                        Icons.lock_outline_rounded,
+                      ).copyWith(
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _hideConfirmPassword = !_hideConfirmPassword;
+                            });
+                          },
+                          icon: Icon(
+                            _hideConfirmPassword
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            color: AppColors.textSecondary,
+                          ),
+                        ),
+                      ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Konfirmasi password wajib diisi.';
+                    }
+                    if (value != _passwordController.text) {
+                      return 'Password tidak cocok.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 28),
+                SizedBox(
+                  width: double.infinity,
+                  height: 54,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _showMessage(
+                          'Validasi berhasil. Pendaftaran belum '
+                          'dihubungkan ke sistem autentikasi.',
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.gold,
+                      foregroundColor: AppColors.background,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    child: const Text(
+                      'Create Account',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 18),
+                Center(
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      const Text(
+                        'Sudah punya akun?',
+                        style: TextStyle(color: AppColors.textSecondary),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const LoginPage(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Sign In',
+                          style: TextStyle(
+                            color: AppColors.gold,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

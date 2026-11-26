@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "310249339504",
+    "project_id": "v-edumatch",
+    "storage_bucket": "v-edumatch.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310249339504:android:41bbb5aac9ae5ec82792b5",
+        "android_client_info": {
+          "package_name": "com.virtualexhibition.mobile_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-mfmIzJ6-x6lkv_7gUISkO3DzBThEbpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
